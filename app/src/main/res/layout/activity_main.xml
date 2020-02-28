@@ -16,7 +16,7 @@ tools:context=".MainActivity">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Register Here"
+            android:text="Register Here !"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
