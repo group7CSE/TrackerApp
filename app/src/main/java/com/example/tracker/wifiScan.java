@@ -176,6 +176,7 @@ public class wifiScan extends AppCompatActivity {
         }
         currentLocation=database.track(Id, mac, date, time);
         currentLoc.setText("YOUR LOCATION:  "+currentLocation);
+
     }
 
     public void initwifiscan(){

@@ -52,6 +52,15 @@
         android:text="Find"
         android:id="@+id/find"
         />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/find"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:text="Load history"
+        android:id="@+id/history"
+        />
 
     <TextView
         android:layout_width="wrap_content"

@@ -11,6 +11,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -85,17 +86,60 @@ public class Database {
 
          System.out.println("*********  "+ roll_no);
 
-         if(!(roll_no == "1"))
+         if(!(roll_no == "1")) {
 
              databaseReference.child("Tracking").child(detail.RollNo).setValue(detail).addOnCompleteListener(new OnCompleteListener<Void>() {
                  @Override
                  public void onComplete(@NonNull Task<Void> task) {
-                     Toast.makeText(mcontext,"Success",Toast.LENGTH_SHORT).show();
+                     Toast.makeText(mcontext, "Success", Toast.LENGTH_SHORT).show();
                  }
              });
-
+             history(Id, mac, date, time);
+         }
          return currentLocation;
      }
+
+     //Store history
+    public void history(String Id,String mac,String date, String time){
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        history_detail hd = new history_detail(roll_no,Id,mac,date,time);
+        databaseReference.child("History").child(hd.RollNo).child(hd.Time).setValue(hd).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(mcontext,"History Success",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    //Fetch History of friend
+    public String fetch_history(String roll){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("History").child("RollNo").child("Time");
+
+        Query zonesQuery = ref.orderByChild("RollNo").equalTo(roll).endAt(5);
+
+        System.out.println("***Find Friend History***");
+
+        zonesQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot zoneSnapshot: dataSnapshot.getChildren()) {
+
+                    mac = zoneSnapshot.child("MAC").getValue(String.class);
+                    time = zoneSnapshot.child("Time").getValue(String.class);
+
+                    System.out.println("@@@@@@@@@@  "+ mac);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("@@@ onCancelled"+ databaseError.toException());
+            }
+        });
+
+        return "";
+    }
 
      //Friend location
      public String find_friendLocation(String roll){
