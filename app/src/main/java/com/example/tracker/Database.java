@@ -2,16 +2,12 @@ package com.example.tracker;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
-import android.text.format.DateFormat;
-import android.text.format.DateUtils;
-import android.util.Log;
 import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,13 +15,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.String;
-
 public class Database {
      private DatabaseReference databaseReference;
      private final Context mcontext;
      public FirebaseAuth firebaseAuth;
      String roll_no,currentLocation, mac, location, location1, block, pos1, pos2, pos3, time, date;
+     String mac1, time1;
 
 
      public Database(Context context){
@@ -114,13 +109,13 @@ public class Database {
 
     //Fetch History of friend
     public String fetch_history(String roll){
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("History").child("RollNo").child("Time");
+        DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("History").child("RollNo");
 
-        Query zonesQuery = ref.orderByChild("RollNo").equalTo(roll).endAt(5);
+        Query zonesQuery2 = ref2.orderByChild("RollNo").equalTo(roll);
 
         System.out.println("***Find Friend History***");
 
-        zonesQuery.addValueEventListener(new ValueEventListener() {
+        zonesQuery2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -129,8 +124,10 @@ public class Database {
                     mac = zoneSnapshot.child("MAC").getValue(String.class);
                     time = zoneSnapshot.child("Time").getValue(String.class);
 
-                    System.out.println("@@@@@@@@@@  "+ mac);
+                    System.out.println("@@@@history  "+ mac + " "+time);
                 }
+                System.out.println("@@@@history 2 "+ mac + " "+time);
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -138,7 +135,7 @@ public class Database {
             }
         });
 
-        return "";
+        return "hai "+mac;
     }
 
      //Friend location
@@ -160,7 +157,7 @@ public class Database {
                      time = zoneSnapshot.child("Time").getValue(String.class);
                      date = zoneSnapshot.child("Date").getValue(String.class);
 
-                     System.out.println("@@@@@@@@@@  "+ mac);
+                     System.out.println("@@@@friend location  "+ mac);
                  }
              }
              @Override
