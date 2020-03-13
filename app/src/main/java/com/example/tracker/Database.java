@@ -109,35 +109,30 @@ public class Database {
 
     //Fetch History of friend
     public String fetch_history(String roll){
-        DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("History").child("RollNo");
+        DatabaseReference Ref;
 
-        Query zonesQuery2 = ref2.orderByChild("RollNo").equalTo(roll);
+            Ref = FirebaseDatabase.getInstance().getReference("History");
+            System.out.println("***Find Friend History***"+roll);
 
-        System.out.println("***Find Friend History***");
+            Ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-        zonesQuery2.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-                for (DataSnapshot zoneSnapshot: dataSnapshot.getChildren()) {
-
-                    mac = zoneSnapshot.child("MAC").getValue(String.class);
-                    time = zoneSnapshot.child("Time").getValue(String.class);
-
-                    System.out.println("@@@@history  "+ mac + " "+time);
+                        mac1 = dataSnapshot.getValue().toString();
+                        //   time = ds.child("id").getValue(String.class);
+                        System.out.println("$$ " + mac1);
+                    }
                 }
-                System.out.println("@@@@history 2 "+ mac + " "+time);
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("@@@ onCancelled"+ databaseError.toException());
-            }
-        });
+                }
+            });
 
-        return "hai "+mac;
+            return mac1;
     }
-
      //Friend location
      public String find_friendLocation(String roll){
 
