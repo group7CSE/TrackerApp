@@ -57,6 +57,7 @@ public class FriendLocation extends AppCompatActivity {
                     return;
                 }
                 display = database.fetch_history(rollNo);
+                System.out.println("@@@@@@@@@@@@@@@@@"+display);
 //Spliting
                  if(display != null){
                     String c = "",d="", h="",e = "",j="";
