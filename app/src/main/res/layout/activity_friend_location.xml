@@ -50,7 +50,7 @@
         android:layout_below="@+id/one"
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
-        android:text="Find"
+        android:text="Find last location"
         android:id="@+id/find"
         />
     <Button
@@ -59,7 +59,7 @@
         android:layout_below="@id/find"
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
-        android:text="Load history"
+        android:text="Load path history"
         android:id="@+id/history"
         />
 
@@ -67,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/locate"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:textColor="#000000"
         android:textSize="20dp"

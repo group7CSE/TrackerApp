@@ -175,7 +175,7 @@ public class wifiScan extends AppCompatActivity {
             Log.e("IN VSLID",result.toString());
         }
         currentLocation=database.track(Id, mac, date, time);
-        currentLoc.setText("YOUR LOCATION:  "+currentLocation);
+        currentLoc.setText("YOUR CURRENT LOCATION:  \n"+currentLocation);
 
     }
 

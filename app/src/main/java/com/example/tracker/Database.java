@@ -187,7 +187,7 @@ public class Database {
              }
          });
 
-         location1 = "Your friend's location "+"\nBlock : "+block+"\nNear or in room \n"+pos1+"\n"+pos2+"\n"+pos3+ "\nDate : "+ date+"\nTime : "+time;
+         location1 = "Your friend's location \n"+"\nBlock : "+block+"\nNear or in room \n"+pos1+"\n"+pos2+"\n"+pos3+ "\nDate : "+ date+"\nTime : "+time;
 
          System.out.println("*********  "+ location1);
 

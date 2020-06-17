@@ -1,48 +1,29 @@
 package com.example.tracker;
 
-import android.annotation.TargetApi;
-import android.content.Context;
-import android.graphics.Color;
-import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.TooltipCompat;
-import android.text.Editable;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import android.content.Intent;
-import android.widget.TextView;
-
-import java.util.*;
+import java.util.Random;
 
 //necessary for mail to admin
-
-import java.util.Properties;
-
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -209,9 +190,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             //Getting content for email
                             String email1 = email;//+","+"dheepigaraja@gmail.com".toString().trim();
                             System.out.println(email1);
-                            String subject = "Request for tracking".toString().trim();
-                            String message = "Track me too!\nMy name : " + name + "\nMy email : " + email + "\nMy Rollno : " + rollno
-                                    + "\nPassword generated for this user : " + pass.toString().trim();
+                            String subject = "Tracking Request Accepted".toString().trim();
+                            String message = "Name : " + name + "\nEmail : " + email + "\nRollno : " + rollno
+                                    + "\nYour Password : " + pass.toString().trim();
 
                             //Creating SendMail object
                             SendMail sm = new SendMail(email1, subject, message);

@@ -87,7 +87,7 @@ public class FriendLocation extends AppCompatActivity {
                     System.out.println(d);}
 //Spliting
                 System.out.println("$$$ "+hist);
-                locate.setText(hist);
+                locate.setText("Path history of Friend\n\n"+hist);
             }
         });
     }
