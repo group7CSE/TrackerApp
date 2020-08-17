@@ -4,11 +4,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class FriendLocation extends AppCompatActivity {
@@ -18,6 +21,8 @@ public class FriendLocation extends AppCompatActivity {
     TextView locate;
     Database database = new Database(FriendLocation.this);
     String rollNo, location, display;
+    ListView historyList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +31,7 @@ public class FriendLocation extends AppCompatActivity {
         find = (Button)findViewById(R.id.find);
         history = (Button) findViewById(R.id.history);
         friend_roll_no = (EditText)findViewById(R.id.friend_rollno);
+        historyList = findViewById(R.id.historyList);
 
         find.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +54,6 @@ public class FriendLocation extends AppCompatActivity {
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String hist="";
                 locate.setText("");
                 rollNo = friend_roll_no.getText().toString().trim().toLowerCase();
                 System.out.println(rollNo);
@@ -82,12 +87,23 @@ public class FriendLocation extends AppCompatActivity {
                             j += a+" ";
                     }
                     String k[] = j.split(Pattern.quote(", "));
-                    for(String a : k)
-                        hist += a+"\n";
-                    System.out.println(d);}
+                     String hist[] = new String[k.length/2] ;
+                     Arrays.fill(hist,"");
+                     int z=-1,x=0;
+                     for(String a : k)
+                     {
+                         if(x%2 == 0)
+                             z++;
+                         x++;
+                         hist[z] += a+"  ";
+                         //System.out.println(a);
+                     }
+                    System.out.println(d);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(FriendLocation.this,android.R.layout.simple_list_item_1,hist);
+                    historyList.setAdapter(adapter);
+                 }
 //Spliting
-                System.out.println("$$$ "+hist);
-                locate.setText("Path history of Friend\n\n"+hist);
+                locate.setText("Path history of Friend\n\n");
             }
         });
     }

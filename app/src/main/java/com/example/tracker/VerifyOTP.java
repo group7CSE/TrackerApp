@@ -1,12 +1,11 @@
 package com.example.tracker;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -70,7 +69,6 @@ public class VerifyOTP extends AppCompatActivity {
 
     //the method is sending verification code
     //the country id is concatenated
-    //you can take the country id as user input as well
     private void sendVerificationCode(String mobile) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 "+91" + mobile,

@@ -20,7 +20,8 @@ public class Database {
      private final Context mcontext;
      public FirebaseAuth firebaseAuth;
      String roll_no,currentLocation, mac, location, location1, block, pos1, pos2, pos3, time, date;
-     String mac1, time1;
+     String mac1;
+    boolean avail = false;
 
 
      public Database(Context context){
@@ -106,6 +107,30 @@ public class Database {
         });
 
     }
+
+    //Check User available
+    public boolean checkUser(String roll_no){
+        DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("Student Details");
+
+        Query zonesQuery = ref2.orderByChild("Rollno").equalTo(roll_no);
+
+        zonesQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot zoneSnapshot: dataSnapshot.getChildren()) {
+
+                    avail = zoneSnapshot.child("Rollno").exists();
+                    System.out.println("xxx "+avail);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("@@@ onCancelled"+ databaseError.toException());
+            }
+        });
+        return avail;
+     }
 
     //Fetch History of friend
     public String fetch_history(String roll){

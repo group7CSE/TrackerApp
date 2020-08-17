@@ -162,53 +162,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(TextUtils.isEmpty(rollno)) {
             Toast.makeText(this, "Please enter designation", Toast.LENGTH_LONG).show();
             return;
-
         }
 
-        Toast.makeText(this, "After successful verification your email and password will be sent to your mail!", Toast.LENGTH_LONG).show();
+        if(database.checkUser(rollno)) {
 
-        //if the email and password are not empty
-        //displaying a progress dialog
+            Toast.makeText(this, "After successful verification your email and password will be sent to your mail!", Toast.LENGTH_LONG).show();
 
-        progressDialog.setMessage("Registering Please Wait...");
-        progressDialog.show();
+            //if the email and password are not empty
+            //displaying a progress dialog
 
-        //creating a new user
-        firebaseAuth.createUserWithEmailAndPassword(email, pass)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+            progressDialog.setMessage("Registering Please Wait...");
+            progressDialog.show();
 
-                        Log.e("Register","password");
-                        //checking if success
-                        if (task.isSuccessful()) {
-                            finish();
-                            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            //creating a new user
+            firebaseAuth.createUserWithEmailAndPassword(email, pass)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
 
-                            //sending mail to admin
+                            Log.e("Register", "password");
+                            //checking if success
+                            if (task.isSuccessful()) {
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
 
-                            //Getting content for email
-                            String email1 = email;//+","+"dheepigaraja@gmail.com".toString().trim();
-                            System.out.println(email1);
-                            String subject = "Tracking Request Accepted".toString().trim();
-                            String message = "Name : " + name + "\nEmail : " + email + "\nRollno : " + rollno
-                                    + "\nYour Password : " + pass.toString().trim();
+                                //sending mail to admin
 
-                            //Creating SendMail object
-                            SendMail sm = new SendMail(email1, subject, message);
-                            sm.execute();
+                                //Getting content for email
+                                String email1 = email;//+","+"dheepigaraja@gmail.com".toString().trim();
+                                System.out.println(email1);
+                                String subject = "Tracking Request Accepted".toString().trim();
+                                String message = "Name : " + name + "\nEmail : " + email + "\nRollno : " + rollno
+                                        + "\nYour Password : " + pass.toString().trim();
 
-                            database.add_UserDetails(name, rollno, email, pass);
+                                //Creating SendMail object
+                                SendMail sm = new SendMail(email1, subject, message);
+                                sm.execute();
 
-                            //Executing sendmail to send email
-                        } else {
-                            //display some message here
-                            Toast.makeText(MainActivity.this, "Registration Error", Toast.LENGTH_LONG).show();
+                                database.add_UserDetails(name, rollno, email, pass);
+
+                                //Executing sendmail to send email
+                            } else {
+                                //display some message here
+                                Toast.makeText(MainActivity.this, "Registration Error", Toast.LENGTH_LONG).show();
+                            }
+                            progressDialog.dismiss();
                         }
-                        progressDialog.dismiss();
-                    }
 
-                });
+                    });
+        }
+        else
+            Toast.makeText(MainActivity.this, "Roll Number Not Available", Toast.LENGTH_LONG).show();
 
     }
 
