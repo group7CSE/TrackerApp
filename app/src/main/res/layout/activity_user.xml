@@ -23,27 +23,32 @@ tools:context=".UserActivity">
         android:layout_gravity="center_horizontal" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Current Location"
         android:id="@+id/currentLocation"
         android:layout_marginTop="100dp"
+        android:background="@drawable/border"
         android:layout_gravity="center_horizontal" />
 
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Friend's Location"
         android:id="@+id/friendLocation"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/border"
         android:layout_gravity="center_horizontal" />
 
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Logout"
         android:id="@+id/buttonLogout"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/border"
         android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

@@ -99,7 +99,7 @@ public class Database {
     public void history(String Id,String mac,String date, String time){
         databaseReference = FirebaseDatabase.getInstance().getReference();
         history_detail hd = new history_detail(roll_no,Id,mac,date,time);
-        databaseReference.child("History").child(hd.RollNo).child(hd.Time).setValue(hd).addOnCompleteListener(new OnCompleteListener<Void>() {
+        databaseReference.child("History").child(hd.RollNo).child(hd.Date).child(hd.Time).setValue(hd).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Toast.makeText(mcontext,"History Success",Toast.LENGTH_SHORT).show();
@@ -134,15 +134,14 @@ public class Database {
 
     //Fetch History of friend
     public String fetch_history(String roll){
-        DatabaseReference Ref;
+        DatabaseReference Ref = FirebaseDatabase.getInstance().getReference("History");
+        System.out.println("***Find Friend History***"+roll);
 
-            Ref = FirebaseDatabase.getInstance().getReference("History");
-            System.out.println("***Find Friend History***"+roll);
+        Ref.orderByChild("Date").limitToLast(1);
 
-            Ref.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+        Ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                         mac1 = dataSnapshot.getValue().toString();

@@ -14,6 +14,9 @@ public class User {
     // Default constructor required for calls to
     // DataSnapshot.getValue(User.class)
 
+    public User() {
+    }
+
     public User(String block, String pos1, String pos2, String pos3, String mac, String ssid) {
         this.block = block;
         this.pos1 = pos1;

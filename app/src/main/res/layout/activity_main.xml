@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -18,8 +20,6 @@ tools:context=".MainActivity">
             android:layout_gravity="center_horizontal"
             android:text="Register Here !"
             android:textAppearance="?android:attr/textAppearanceLarge" />
-
-
 
         <EditText
             android:id="@+id/editTextEmail"
@@ -55,9 +55,11 @@ tools:context=".MainActivity">
             />
         <Button
             android:id="@+id/buttonSignup"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/border"
             android:text="Signup" />
 
         <TextView
@@ -76,6 +78,39 @@ tools:context=".MainActivity">
             android:text="Not Student or Staff? Click Here"
             android:textAlignment="center" />
 
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/bgapp"
+        android:layout_width="526dp"
+        android:layout_height="900dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/bgapp1"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/textsplash"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/log1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/aldrich"
+            android:text="TRACKER"
+            android:layout_marginTop="15dp"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </RelativeLayout>

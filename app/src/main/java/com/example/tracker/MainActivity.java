@@ -8,10 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +37,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button buttonSignup;
     private TextView textViewSignin, textViewOther;
 
+    ImageView bgapp;
+    Animation frombottom;
+    LinearLayout register, textsplash;
+
     private ProgressDialog progressDialog;
 
     private FirebaseAuth firebaseAuth;
@@ -45,6 +53,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        frombottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
+
+        bgapp = (ImageView) findViewById(R.id.bgapp);
+        register = findViewById(R.id.register);
+        textsplash = findViewById(R.id.textsplash);
+
+        bgapp.animate().translationY(-1900).setDuration(2500).setStartDelay(3000);
+        textsplash.animate().translationY(-1900).setDuration(2500).setStartDelay(3000);
+        register.startAnimation(frombottom);
 
         //initializing firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();

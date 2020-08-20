@@ -29,7 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="40dp"
-            android:text="Add access point" />
+            android:text="Add access point"
+            android:background="@drawable/border"/>
 
         <EditText
             android:layout_width="wrap_content"
@@ -45,6 +46,7 @@
             android:layout_height="wrap_content"
             android:text="Location"
             android:id="@+id/location"
+            android:background="@drawable/border"
             android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal" />
 

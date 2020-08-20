@@ -42,6 +42,7 @@ public class FriendLocation extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Please enter roll no",Toast.LENGTH_LONG).show();
                     return;
                 }
+                historyList.setVisibility(View.INVISIBLE);
                 location = database.find_friendLocation(rollNo);
                 System.out.println(rollNo);
                 if(location.contains("null"))
@@ -61,32 +62,34 @@ public class FriendLocation extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Please enter roll no",Toast.LENGTH_LONG).show();
                     return;
                 }
+                historyList.setVisibility(View.VISIBLE);
                 display = database.fetch_history(rollNo);
                 System.out.println("@@@@@@@@@@@@@@@@@"+display);
-//Spliting
+                //Splitting
                  if(display != null){
-                    String c = "",d="", h="",e = "",j="";
-                    String[] arrOfStr = display.split(Pattern.quote("}}"));
-                    for (String a : arrOfStr)
-                        if(a.contains(rollNo))
-                            c = a;
-                    String[] b = c.split(Pattern.quote("={"));
-                    for(String a : b)
-                    {    if(a.contains("ID"))
-                        e += " "+a;
-                    }
-                    String[] f = e.split(Pattern.quote("},"));
-                    for(String a : f)
-                        h += a;
-                    String i[] = h.split(" ");
-                    for(String a : i)
-                    {
-                        if(a.contains("ID"))
-                            j += a+" ";
-                        if(a.contains("Time"))
-                            j += a+" ";
-                    }
-                    String k[] = j.split(Pattern.quote(", "));
+                     String c = "",d="", h="",e = "",j="";
+                     String[] arrOfStr = display.split(Pattern.quote("}}},"));
+                     for (String a : arrOfStr)
+                         if(a.contains(rollNo))
+                             c += a;
+                     String[] b = c.split(Pattern.quote("}},"));
+                     for(String a : b){
+                         if(a.contains("ID")){
+                             e = a;
+                             break;}
+                     }
+                     String[] f = e.split(Pattern.quote("={"));
+                     for(String a : f)
+                         h += " "+a;
+                     String i[] = h.split(" ");
+                     for(String a : i)
+                     {
+                         if(a.contains("ID"))
+                             j += a+" ";
+                         if(a.contains("Time"))
+                             j += a+" ";
+                     }
+                     String k[] = j.split(Pattern.quote(", "));
                      String hist[] = new String[k.length/2] ;
                      Arrays.fill(hist,"");
                      int z=-1,x=0;
@@ -102,7 +105,7 @@ public class FriendLocation extends AppCompatActivity {
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(FriendLocation.this,android.R.layout.simple_list_item_1,hist);
                     historyList.setAdapter(adapter);
                  }
-//Spliting
+//Splitting
                 locate.setText("Path history of Friend\n\n");
             }
         });
